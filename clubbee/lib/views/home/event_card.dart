@@ -2,7 +2,6 @@ import 'package:clubbee/models/event.dart';
 import 'package:clubbee/preferences.dart';
 import 'package:clubbee/utils/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class EventCard extends StatefulWidget {
   final Event event;
@@ -16,21 +15,21 @@ class _EventCardState extends State<EventCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height / 844 * 443,
-        ),
-        decoration: BoxDecoration(
-          border: Border.all(),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          children: [
-            _EventCardTitle(eventName: widget.event.name),
-            _EventCardDescribtion(eventDesc: widget.event.description),
-            _EventCardButtons(),
-          ],
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+      child: Card(
+        elevation: 8,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height / 844 * 443,
+          ),
+          child: Column(
+            children: [
+              _EventCardTitle(eventName: widget.event.name),
+              _EventCardDescribtion(eventDesc: widget.event.description),
+              const _EventCardButtons(),
+            ],
+          ),
         ),
       ),
     );
@@ -55,11 +54,13 @@ class _EventCardButtons extends StatelessWidget {
             color: const Color.fromRGBO(246, 185, 59, 0.2),
           ),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: const [
               Icon(Icons.favorite),
               Text(
                 "Join",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.black, fontSize: 24),
               )
             ],
           ),
