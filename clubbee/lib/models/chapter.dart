@@ -6,6 +6,11 @@ class Chapter {
   final List<int> activeIdList;
   final List<int> eventIdList;
 
-  Chapter(this.id, this.describtion, this.name, this.adminIdList,
-      this.activeIdList, this.eventIdList);
+  Chapter(
+      {required this.id,
+      required this.describtion,
+      required this.name,
+      required this.adminIdList,
+      required this.activeIdList,
+      required this.eventIdList});
 }

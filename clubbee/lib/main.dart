@@ -2,6 +2,7 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:clubbee/views/main_page/main_page.dart';
+import 'package:clubbee/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'amplifyconfiguration.dart';
@@ -27,7 +28,8 @@ class _MyAppState extends State<MyApp> {
     return Authenticator(
       child: MaterialApp(
         builder: Authenticator.builder(),
-        home: MainPage(),
+        theme: Theme.of(context).copyWith(primaryColor: Colors.yellow),
+        home: const MainPage(),
       ),
     );
   }

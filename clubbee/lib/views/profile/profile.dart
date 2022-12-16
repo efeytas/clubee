@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:amplify_authenticator/amplify_authenticator.dart';
 import 'package:clubbee/preferences.dart';
 import 'package:clubbee/services/api_sevices.dart';
+import 'package:clubbee/services/auth_services.dart';
 import 'package:flutter/material.dart';
 import 'package:clubbee/views/profile/profile_widget.dart';
 import 'package:image_picker/image_picker.dart';
@@ -72,14 +73,9 @@ class ProfilePageState extends State<ProfilePage> {
             buildNameAndSurname(user),
             const SizedBox(height: 24),
             NumbersWidget(),
-            const SizedBox(height: 24),
-            Center(child: editProfile()),
             const SizedBox(height: 48),
             buildAbout(user),
             participatedEvents(),
-            likedEvents(),
-            notificationSettings(),
-            languageSettings(),
             signOutButton()
           ],
         ),
@@ -90,15 +86,11 @@ class ProfilePageState extends State<ProfilePage> {
   Widget participatedEvents() =>
       ButtonWidget(text: 'Participated Events', onClicked: () {});
 
-  Widget likedEvents() => ButtonWidget(text: 'Liked Events', onClicked: () {});
-
-  Widget notificationSettings() =>
-      ButtonWidget(text: 'Notification Settings', onClicked: () {});
-
-  Widget languageSettings() =>
-      ButtonWidget(text: 'Language Settings', onClicked: () {});
-
-  Widget signOutButton() => ButtonWidget(text: 'Sign Out', onClicked: () {});
+  Widget signOutButton() => ButtonWidget(
+      text: 'Sign Out',
+      onClicked: () {
+        AuthService().signOutCurrentUser();
+      });
 
   Widget buildNameAndSurname(User user) => Column(
         children: [
