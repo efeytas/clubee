@@ -1,6 +1,11 @@
 import 'dart:async';
 
+import 'package:clubbee/global_parameters.dart';
+import 'package:clubbee/views/main_page/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../services/api_sevices.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -35,6 +40,7 @@ class _SplashScreenState extends State<SplashScreen>
         });
       }
     });
+    loadDataThenStart();
   }
 
   @override
@@ -45,6 +51,11 @@ class _SplashScreenState extends State<SplashScreen>
     super.dispose();
   }
 
+  loadDataThenStart() async {
+    currentUser = await ApiServices.getUserData(150180086);
+    Get.off(() => const MainPage());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,14 +64,14 @@ class _SplashScreenState extends State<SplashScreen>
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(r), color: Colors.yellow),
           duration: const Duration(milliseconds: 300),
+          height: h,
+          width: w,
           child: const FittedBox(
             child: Text(
               "Clubbee",
               style: TextStyle(color: Colors.black87),
             ),
           ),
-          height: h,
-          width: w,
         ),
       ),
     );

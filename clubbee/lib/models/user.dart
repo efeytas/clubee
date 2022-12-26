@@ -1,6 +1,6 @@
 class User {
   final int id;
-  final String username;
+  final String password;
   final String fullName;
   final String email;
   final String photoUrl;
@@ -8,7 +8,7 @@ class User {
 
   User(
       {required this.id,
-      required this.username,
+      required this.password,
       required this.fullName,
       required this.email,
       required this.photoUrl,

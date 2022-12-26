@@ -1,5 +1,4 @@
 import 'package:clubbee/global_parameters.dart';
-import 'package:clubbee/preferences.dart';
 import 'package:clubbee/services/api_sevices.dart';
 import 'package:clubbee/views/home/event_card.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +28,7 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ApiServices.getUserData(150180086);
     return Scaffold(
       body: (_isLoading)
           ? const Center(

@@ -1,7 +1,5 @@
 import 'dart:io';
-
-import 'package:amplify_authenticator/amplify_authenticator.dart';
-import 'package:clubbee/preferences.dart';
+import 'package:clubbee/global_parameters.dart';
 import 'package:clubbee/services/api_sevices.dart';
 import 'package:clubbee/services/auth_services.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +17,7 @@ class ProfilePage extends StatefulWidget {
 class ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.myUser;
+    final user = currentUser;
     final ImagePicker _picker = ImagePicker();
 
     return Scaffold(
@@ -29,7 +27,7 @@ class ProfilePageState extends State<ProfilePage> {
           physics: const BouncingScrollPhysics(),
           children: [
             ProfileWidget(
-              imagePath: user.photoUrl,
+              imagePath: user?.photoUrl ?? "",
               onClicked: () async {
                 showModalBottomSheet(
                     context: context,
@@ -70,7 +68,7 @@ class ProfilePageState extends State<ProfilePage> {
               },
             ),
             const SizedBox(height: 24),
-            buildNameAndSurname(user),
+            buildNameAndSurname(user!),
             const SizedBox(height: 24),
             NumbersWidget(),
             const SizedBox(height: 48),

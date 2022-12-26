@@ -1,5 +1,4 @@
 import 'package:clubbee/models/event.dart';
-import 'package:clubbee/preferences.dart';
 import 'package:clubbee/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,10 @@ class _EventCardState extends State<EventCard> {
           ),
           child: Column(
             children: [
-              _EventCardTitle(eventName: widget.event.name),
+              _EventCardTitle(
+                eventName: widget.event.name,
+                chapterPhoto: null,
+              ),
               _EventCardDescribtion(eventDesc: widget.event.description),
               const _EventCardButtons(),
             ],
@@ -94,10 +96,10 @@ class _EventCardDescribtion extends StatelessWidget {
 
 class _EventCardTitle extends StatelessWidget {
   final String eventName;
-  const _EventCardTitle({
-    Key? key,
-    required this.eventName,
-  }) : super(key: key);
+  final String? chapterPhoto;
+  const _EventCardTitle(
+      {Key? key, required this.eventName, required this.chapterPhoto})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,8 +113,9 @@ class _EventCardTitle extends StatelessWidget {
                 flex: 2,
                 child: CircleAvatar(
                   radius: double.maxFinite,
-                  backgroundImage:
-                      NetworkImage(UserPreferences.myUser.photoUrl),
+                  backgroundImage: (chapterPhoto != null)
+                      ? NetworkImage(chapterPhoto!)
+                      : null,
                 ),
               ),
               Expanded(

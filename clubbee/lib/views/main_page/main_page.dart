@@ -1,3 +1,5 @@
+import 'package:clubbee/global_parameters.dart';
+import 'package:clubbee/services/api_sevices.dart';
 import 'package:clubbee/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +28,11 @@ class _MainPageState extends State<MainPage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override

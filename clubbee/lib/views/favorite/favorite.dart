@@ -1,7 +1,5 @@
-import 'package:clubbee/preferences.dart';
 import 'package:clubbee/views/home/event_card.dart';
 import 'package:flutter/material.dart';
-import 'package:clubbee/demo_values.dart';
 
 import '../../global_parameters.dart';
 import '../../services/api_sevices.dart';
