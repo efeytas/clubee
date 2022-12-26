@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:clubbee/global_parameters.dart';
+import 'package:clubbee/services/auth_services.dart';
 import 'package:clubbee/views/main_page/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,7 +54,8 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   loadDataThenStart() async {
-    currentUser = await ApiServices.getUserData(150180086);
+    AuthService().sendUserAttributesToEc2();
+    currentUser = await ApiServices.getUserData("150180086");
     Get.off(() => const MainPage());
   }
 

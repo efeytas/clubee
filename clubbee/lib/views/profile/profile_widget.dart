@@ -58,8 +58,8 @@ class ButtonWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
           backgroundColor: Color.fromARGB(255, 253, 221, 125),
         ),
-        child: Text(text),
         onPressed: onClicked,
+        child: Text(text),
       );
 }
 
@@ -75,7 +75,7 @@ class ProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = Colors.amber;
+    const color = Colors.amber;
 
     return Center(
       child: Stack(
@@ -92,6 +92,21 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildImage() {
+    if (imagePath == "") {
+      return ClipOval(
+        child: Material(
+            color: Colors.transparent,
+            child: Container(
+              color: Colors.blueGrey,
+              height: 128,
+              width: 128,
+              child: const Icon(
+                Icons.person,
+                size: 48,
+              ),
+            )),
+      );
+    }
     final image = NetworkImage(imagePath);
 
     return ClipOval(
@@ -114,7 +129,7 @@ class ProfileWidget extends StatelessWidget {
         child: buildCircle(
           color: color,
           all: 8,
-          child: Icon(
+          child: const Icon(
             Icons.edit,
             color: Colors.white,
             size: 20,

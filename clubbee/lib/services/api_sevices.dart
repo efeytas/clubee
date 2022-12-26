@@ -26,12 +26,18 @@ class ApiServices {
   static uploadPhotoAsBytes(File photo) {}
 
   static Future<bool> joinEvent(Event event) async {
-    //var response = http.post(Uri.parse("efe.com/event/join"), body: {"eventID": 1232});
-    return true;
-    // return http status code 200 on successful join
+    var response = await http
+        .post(Uri.parse("$baseUrl/event/join"), body: {"eventID": 1232});
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      print(response.statusCode);
+      print(response.body);
+      return false;
+    }
   }
 
-  static Future<User> getUserData(int schoolNumber) async {
+  static Future<User> getUserData(String schoolNumber) async {
     var response = await http.get(Uri.parse("$baseUrl/profile/$schoolNumber"));
     var userData = jsonDecode(response.body)[0];
     return User(

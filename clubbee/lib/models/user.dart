@@ -4,7 +4,7 @@ class User {
   final String fullName;
   final String email;
   final String photoUrl;
-  final int studentNumber;
+  final String studentNumber;
 
   User(
       {required this.id,

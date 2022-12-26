@@ -28,7 +28,7 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ApiServices.getUserData(150180086);
+    ApiServices.getUserData("150180086");
     return Scaffold(
       body: (_isLoading)
           ? const Center(
