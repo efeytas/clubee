@@ -28,7 +28,16 @@ class _MyAppState extends State<MyApp> {
     return Authenticator(
       child: MaterialApp(
         builder: Authenticator.builder(),
-        theme: Theme.of(context).copyWith(primaryColor: Colors.yellow),
+        theme: ThemeData.from(
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.amber,
+            backgroundColor: Colors.white,
+          ),
+        ).copyWith(
+          indicatorColor: Colors.amber,
+        ),
+        //Theme.of(context).copyWith(primaryColor: Colors.yellow),
+
         home: const MainPage(),
       ),
     );

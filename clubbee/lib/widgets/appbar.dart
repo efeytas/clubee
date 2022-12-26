@@ -15,7 +15,6 @@ class AppBarScreen extends StatelessWidget with PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: Colors.amber,
       shadowColor: Colors.amber,
-      elevation: 4,
       toolbarHeight: 100,
     );
   }

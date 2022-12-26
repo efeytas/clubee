@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:clubbee/models/event.dart';
 import 'package:clubbee/preferences.dart';
 import 'package:clubbee/utils/text_styles.dart';
@@ -50,7 +52,7 @@ class _EventCardButtons extends StatelessWidget {
           width: MediaQuery.of(context).size.width / 375 * 157,
           height: MediaQuery.of(context).size.height / 844 * 50,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(15),
             color: const Color.fromRGBO(246, 185, 59, 0.2),
           ),
           child: Row(

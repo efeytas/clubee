@@ -37,6 +37,9 @@ dependencies:
   amplify_authenticator: ^0.2.4
   flutter_svg: ^1.1.6
   image_picker: ^0.8.6
+  ##©for navbar
+  molten_navigationbar_flutter: ^1.0.0
+
   
 
 dev_dependencies:

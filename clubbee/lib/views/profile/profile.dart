@@ -69,12 +69,10 @@ class ProfilePageState extends State<ProfilePage> {
                     });
               },
             ),
-            const SizedBox(height: 24),
             buildNameAndSurname(user),
             const SizedBox(height: 24),
             NumbersWidget(),
             const SizedBox(height: 48),
-            buildAbout(user),
             participatedEvents(),
             signOutButton()
           ],
@@ -109,23 +107,5 @@ class ProfilePageState extends State<ProfilePage> {
   Widget editProfile() => ButtonWidget(
         text: 'Edit Profile',
         onClicked: () {},
-      );
-
-  Widget buildAbout(User user) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 48),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Student ID Buraya başka bişi yapcm',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              user.studentNumber.toString(),
-              style: TextStyle(fontSize: 16, height: 1.4),
-            ),
-          ],
-        ),
       );
 }

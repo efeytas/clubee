@@ -1,6 +1,6 @@
 import 'package:clubbee/widgets/appbar.dart';
 import 'package:flutter/material.dart';
-
+import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 import '../favorite/favorite.dart';
 import '../home/home_page.dart';
 import '../profile/profile.dart';
@@ -32,37 +32,35 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarScreen(),
-      body: //Center(
-          //child: _widgetOptions.elementAt(_selectedIndex),
-
-          //),
-          IndexedStack(
+      body: IndexedStack(
         index: _selectedIndex,
         children: _widgetOptions,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 30,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.amber,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(.60),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+      bottomNavigationBar: MoltenBottomNavigationBar(
+        selectedIndex: _selectedIndex,
+        onTabChange: (index) => setState(() {
+          _selectedIndex = index;
+        }),
+        barColor: Colors.amber,
+        margin: EdgeInsets.all(0.0),
+        domeHeight: 20,
+        domeCircleColor: Colors.white,
+        tabs: [
+          MoltenTab(
+            unselectedColor: Colors.white,
             icon: Icon(Icons.home),
-            label: 'Home',
+            selectedColor: Colors.amber,
           ),
-          BottomNavigationBarItem(
+          MoltenTab(
+            unselectedColor: Colors.white,
             icon: Icon(Icons.grade),
-            label: 'Highlight',
+            selectedColor: Colors.amber,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
+          MoltenTab(
+              unselectedColor: Colors.white,
+              icon: Icon(Icons.person),
+              selectedColor: Colors.amber),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
       ),
     );
   }
