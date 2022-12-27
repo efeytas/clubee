@@ -81,7 +81,7 @@ class ApiServices {
   }
 
   static Future<List<Event>> getHighlightedEvents() async {
-    var response = await http.get(Uri.parse("$baseUrl/events/highlited"));
+    var response = await http.get(Uri.parse("$baseUrl/events/highlighted"));
     var rawEvents = jsonDecode(response.body);
     List<Event> events = [];
     for (var rawEvent in rawEvents) {
