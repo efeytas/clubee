@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:clubbee/global_parameters.dart';
 
 class NumbersWidget extends StatelessWidget {
   @override
@@ -6,8 +7,6 @@ class NumbersWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           buildButton(context, '55', 'Participated Event'),
-          buildDivider(),
-          buildButton(context, '105', 'Liked Event'),
         ],
       );
   Widget buildDivider() => Container(
@@ -91,35 +90,74 @@ class ProfileWidget extends StatelessWidget {
     );
   }
 
+  chooseUserPhoto() {
+    switch (currentUser?.id) {
+      case 6:
+        return "assets/users/Efe.jpg";
+      case 7:
+        return "assets/users/busra.jpg";
+      case 8:
+        return "assets/users/Sule.jpg";
+      case 9:
+        return "assets/users/Dara.jpg";
+      default:
+        {
+          return "";
+        }
+    }
+  }
+
   Widget buildImage() {
-    if (imagePath == "") {
+    var userbasepath = chooseUserPhoto();
+
+    if (imagePath != "") {
+      final image = AssetImage(imagePath);
+
       return ClipOval(
         child: Material(
-            color: Colors.transparent,
-            child: Container(
-              color: Colors.blueGrey,
-              height: 128,
-              width: 128,
-              child: const Icon(
-                Icons.person,
-                size: 48,
-              ),
-            )),
+          color: Colors.transparent,
+          child: Ink.image(
+            image: image,
+            fit: BoxFit.cover,
+            width: 128,
+            height: 128,
+            child: InkWell(onTap: onClicked),
+          ),
+        ),
       );
     }
-    final image = NetworkImage(imagePath);
+
+    if (userbasepath != "") {
+      var image = AssetImage(userbasepath);
+      return ClipOval(
+        child: Material(
+          color: Colors.transparent,
+          child: Ink.image(
+            image: image,
+            fit: BoxFit.cover,
+            width: 128,
+            height: 128,
+            child: InkWell(onTap: onClicked),
+          ),
+        ),
+      );
+    }
 
     return ClipOval(
       child: Material(
-        color: Colors.transparent,
-        child: Ink.image(
-          image: image,
-          fit: BoxFit.cover,
-          width: 128,
-          height: 128,
-          child: InkWell(onTap: onClicked),
-        ),
-      ),
+          color: Colors.transparent,
+          child: Container(
+            color: Colors.blueGrey,
+            height: 128,
+            width: 128,
+            child: IconButton(
+              icon: const Icon(
+                Icons.person,
+                size: 48,
+              ),
+              onPressed: onClicked,
+            ),
+          )),
     );
   }
 

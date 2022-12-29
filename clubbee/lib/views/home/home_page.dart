@@ -1,4 +1,5 @@
 import 'package:clubbee/global_parameters.dart';
+import 'package:clubbee/models/event.dart';
 import 'package:clubbee/services/api_sevices.dart';
 import 'package:clubbee/views/home/event_card.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,6 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ApiServices.getUserData("150180086");
     return Scaffold(
       body: (_isLoading)
           ? const Center(
@@ -37,11 +37,26 @@ class HomePageState extends State<HomePage> {
           : ListView.builder(
               itemCount: mainStreamEvents.length,
               itemBuilder: (BuildContext context, int index) {
-                return EventCard(
-                  event: mainStreamEvents[index],
-                );
+                return (mainStreamEvents[index].eventStatus ==
+                        EventStatus.active)
+                    ? EventCard(
+                        event: mainStreamEvents[index],
+                        isAlreadyJoined:
+                            checkForAlreadyJoined(mainStreamEvents[index]),
+                      )
+                    : Container();
               },
             ),
     );
+  }
+
+  bool checkForAlreadyJoined(Event event) {
+    for (var appliedEvent in appliedEvents) {
+      if (event.id == appliedEvent.id) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }

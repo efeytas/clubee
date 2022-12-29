@@ -36,10 +36,11 @@ class _MyAppState extends State<MyApp> {
         SignUpFormField.custom(
             title: "School Id",
             required: true,
-            attributeKey: CognitoUserAttributeKey.parse("school_id")),
+            attributeKey: CognitoUserAttributeKey.parse("custom:school_id")),
       ]),
       child: GetMaterialApp(
         builder: Authenticator.builder(),
+        debugShowCheckedModeBanner: false,
         theme: Theme.of(context).copyWith(primaryColor: Colors.yellow),
         home: const SplashScreen(),
       ),

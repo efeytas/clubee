@@ -39,6 +39,9 @@ dependencies:
   image_picker: ^0.8.6
   get: ^4.6.5
   shared_preferences: ^2.0.15
+  animated_text_kit: ^4.2.2
+  lottie: ^2.1.0
+  dio: ^4.0.6
   
 
 dev_dependencies:
@@ -61,8 +64,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - join_emoji.svg
-    - Vector.svg
+    - assets/chapters/
+    - assets/
+    - assets/users/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

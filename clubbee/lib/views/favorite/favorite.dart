@@ -2,6 +2,7 @@ import 'package:clubbee/views/home/event_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../global_parameters.dart';
+import '../../models/event.dart';
 import '../../services/api_sevices.dart';
 
 class FavoritePage extends StatefulWidget {
@@ -19,8 +20,7 @@ class FavoritePageState extends State<FavoritePage> {
   }
 
   _getData() async {
-    var events = await ApiServices.getAllEvents();
-    await Future.delayed(const Duration(milliseconds: 500));
+    var events = await ApiServices.getHighlightedEvents();
     setState(() {
       higlightedEvents = events;
       _isLoading = false;
@@ -37,11 +37,27 @@ class FavoritePageState extends State<FavoritePage> {
           : ListView.builder(
               itemCount: higlightedEvents.length,
               itemBuilder: (BuildContext context, int index) {
-                return EventCard(
-                  event: higlightedEvents[index],
-                );
+                return (higlightedEvents[index].eventStatus ==
+                        EventStatus.active)
+                    ? EventCard(
+                        event: higlightedEvents[index],
+                        isAlreadyJoined:
+                            checkForAlreadyJoined(higlightedEvents[index]),
+                      )
+                    : Container();
               },
             ),
     );
+  }
+
+  bool checkForAlreadyJoined(Event event) {
+    for (var mainEvent in higlightedEvents) {
+      for (var appliedEvent in appliedEvents) {
+        if (mainEvent.id == appliedEvent.id) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

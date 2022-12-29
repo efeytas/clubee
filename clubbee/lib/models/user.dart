@@ -1,16 +1,14 @@
 class User {
   final int id;
-  final String password;
   final String fullName;
   final String email;
-  final String photoUrl;
+  final String amazon_id;
   final String studentNumber;
 
   User(
       {required this.id,
-      required this.password,
       required this.fullName,
       required this.email,
-      required this.photoUrl,
+      required this.amazon_id,
       required this.studentNumber});
 }
