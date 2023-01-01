@@ -4,6 +4,8 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:clubbee/views/main_page/main_page.dart';
 import 'package:flutter/material.dart';
 
+import 'amplifyconfiguration.dart';
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
@@ -32,6 +34,16 @@ class _MyAppState extends State<MyApp> {
     try {
       await Amplify.addPlugin(AmplifyAuthCognito());
       //await Amplify.configure(amplifyconfig);
+      print('Successfully configured');
+    } on Exception catch (e) {
+      print('Error configuring Amplify: $e');
+    }
+  }
+
+  void _configureAmplify() async {
+    try {
+      await Amplify.addPlugin(AmplifyAuthCognito());
+      await Amplify.configure(amplifyconfig);
       print('Successfully configured');
     } on Exception catch (e) {
       print('Error configuring Amplify: $e');
