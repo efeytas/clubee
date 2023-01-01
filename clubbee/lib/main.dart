@@ -50,16 +50,6 @@ class _MyAppState extends State<MyApp> {
   void _configureAmplify() async {
     try {
       await Amplify.addPlugin(AmplifyAuthCognito());
-      //await Amplify.configure(amplifyconfig);
-      print('Successfully configured');
-    } on Exception catch (e) {
-      print('Error configuring Amplify: $e');
-    }
-  }
-
-  void _configureAmplify() async {
-    try {
-      await Amplify.addPlugin(AmplifyAuthCognito());
       await Amplify.configure(amplifyconfig);
       print('Successfully configured');
     } on Exception catch (e) {
