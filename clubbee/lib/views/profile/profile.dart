@@ -1,58 +1,115 @@
-import 'package:clubbee/preferences.dart';
+import 'dart:io';
+import 'package:clubbee/global_parameters.dart';
+import 'package:clubbee/services/api_sevices.dart';
+import 'package:clubbee/services/auth_services.dart';
+import 'package:clubbee/views/profile/participated_events.dart';
+import 'package:clubbee/widgets/single_chapter_page.dart';
 import 'package:flutter/material.dart';
 import 'package:clubbee/views/profile/profile_widget.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../models/user.dart';
+
+XFile? file;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  ProfilePageState createState() => ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.myUser;
-
+    final user = currentUser;
+    final ImagePicker picker = ImagePicker();
     return Scaffold(
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath: user.photoUrl,
-            onClicked: () async {},
-          ),
-          const SizedBox(height: 24),
-          buildNameAndSurname(user),
-          const SizedBox(height: 24),
-          NumbersWidget(),
-          const SizedBox(height: 24),
-          Center(child: editProfile()),
-          const SizedBox(height: 48),
-          buildAbout(user),
-          participatedEvents(),
-          likedEvents(),
-          notificationSettings(),
-          languageSettings(),
-          signOutButton()
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          children: [
+            ProfileWidget(
+              imagePath: file?.path ?? "",
+              onClicked: () async {
+                showModalBottomSheet(
+                    context: context,
+                    elevation: 4,
+                    builder: (context) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 32.0),
+                        child: Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: [
+                            ListTile(
+                              leading: const Icon(Icons.camera),
+                              title: const Text("Camera"),
+                              onTap: () async {
+                                Navigator.pop(context);
+                                var new_file = await picker.pickImage(
+                                    source: ImageSource.camera);
+                                setState(() {
+                                  file = new_file;
+                                });
+                                if (file == null) {
+                                  print("failed");
+                                }
+                              },
+                            ),
+                            Container(
+                              color: Colors.blueGrey,
+                              height: 1,
+                            ),
+                            ListTile(
+                              leading: const Icon(Icons.photo_library),
+                              title: const Text("Photo Library"),
+                              onTap: () async {
+                                Navigator.pop(context);
+                                var new_file = await picker.pickImage(
+                                    source: ImageSource.gallery);
+                                setState(() {
+                                  file = new_file;
+                                });
+                                if (file == null) {
+                                  print("failed");
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    });
+              },
+            ),
+            const SizedBox(height: 24),
+            buildNameAndSurname(user!),
+            const SizedBox(height: 24),
+            //NumbersWidget(),
+            const SizedBox(height: 24),
+            buildAbout(user),
+            const SizedBox(height: 10),
+            participatedEvents(),
+            const SizedBox(height: 8),
+            signOutButton()
+          ],
+        ),
       ),
     );
   }
 
-  Widget participatedEvents() =>
-      ButtonWidget(text: 'Participated Events', onClicked: () {});
+  Widget participatedEvents() => ButtonWidget(
+      text: 'Participated Events',
+      onClicked: () {
+        Get.to(() => ParticipatedEventsPage());
+      });
 
-  Widget likedEvents() => ButtonWidget(text: 'Liked Events', onClicked: () {});
-
-  Widget notificationSettings() =>
-      ButtonWidget(text: 'Notification Settings', onClicked: () {});
-
-  Widget languageSettings() =>
-      ButtonWidget(text: 'Language Settings', onClicked: () {});
-
-  Widget signOutButton() => ButtonWidget(text: 'Sign Out', onClicked: () {});
+  Widget signOutButton() => ButtonWidget(
+      text: 'Sign Out',
+      onClicked: () {
+        AuthService().signOutCurrentUser();
+      });
 
   Widget buildNameAndSurname(User user) => Column(
         children: [
@@ -76,17 +133,35 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget buildAbout(User user) => Container(
         padding: EdgeInsets.symmetric(horizontal: 48),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Student ID Buraya başka bişi yapcm',
+              'Active Chapters',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            Text(
-              user.studentNumber.toString(),
-              style: TextStyle(fontSize: 16, height: 1.4),
-            ),
+            Container(
+              height: 270,
+              child: ListView.builder(
+                itemCount: activeChapters.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: Colors.amber.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(16)),
+                      child: ListTile(
+                        title: Text(
+                          activeChapters[index][0],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            )
           ],
         ),
       );

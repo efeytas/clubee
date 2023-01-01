@@ -1,10 +1,11 @@
+import 'package:clubbee/global_parameters.dart';
+import 'package:clubbee/services/api_sevices.dart';
 import 'package:clubbee/widgets/appbar.dart';
 import 'package:flutter/material.dart';
 
 import '../favorite/favorite.dart';
 import '../home/home_page.dart';
 import '../profile/profile.dart';
-import '../search/search.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,7 +20,6 @@ class _MainPageState extends State<MainPage> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Search(),
     FavoritePage(),
     ProfilePage(),
   ];
@@ -28,6 +28,11 @@ class _MainPageState extends State<MainPage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -53,10 +58,6 @@ class _MainPageState extends State<MainPage> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.grade),

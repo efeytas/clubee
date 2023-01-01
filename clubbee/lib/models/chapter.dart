@@ -2,10 +2,13 @@ class Chapter {
   final int id;
   final String describtion;
   final String name;
-  final List<int> adminIdList;
-  final List<int> activeIdList;
-  final List<int> eventIdList;
+  final bool status;
+  final int adminId;
 
-  Chapter(this.id, this.describtion, this.name, this.adminIdList,
-      this.activeIdList, this.eventIdList);
+  Chapter(
+      {required this.id,
+      required this.describtion,
+      required this.name,
+      required this.status,
+      required this.adminId});
 }
