@@ -123,7 +123,7 @@ class ApiServices {
         id: userData[0],
         fullName: userData[1],
         email: userData[2],
-        amazon_id: userData[3] ?? "",
+        admin_password: userData[3] ?? "",
         studentNumber: userData[4]);
   }
 
