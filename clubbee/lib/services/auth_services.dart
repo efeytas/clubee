@@ -43,7 +43,7 @@ class AuthService {
             email = element.value;
             break;
           case "sub":
-            admin_password = element.value;
+            amazonid = element.value;
             break;
           case "custom:school_id":
             print(element.value);
@@ -62,7 +62,7 @@ class AuthService {
             "full_name": fullName,
             "email": email,
             "studentnumber": schoolId,
-            "admin_password": admin_password
+            "admin_password": amazonid
           },
           options: Options(headers: {
             "auth-key":

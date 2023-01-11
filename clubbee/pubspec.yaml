@@ -47,6 +47,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
+  mocktail: ^0.2.0
+  mockito: ^5.0.15
+  build_runner: ^2.1.4
 
 
   flutter_lints: ^2.0.0
